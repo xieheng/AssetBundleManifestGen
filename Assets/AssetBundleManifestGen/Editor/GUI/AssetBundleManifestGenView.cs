@@ -17,6 +17,33 @@ namespace XH
 
         public void OnGUI()
         {
+            EditorGUILayout.BeginHorizontal();
+
+            EditorGUI.BeginChangeCheck();
+            var path = EditorGUILayout.TextField("Path", model.assetBundlePath);
+            if (EditorGUI.EndChangeCheck())
+            {
+                model.assetBundlePath = path;
+            }
+
+            if (GUILayout.Button("...", EditorStyles.miniButton, GUILayout.Width(40)))
+            {
+                path = EditorUtility.OpenFolderPanel("Select AssetBundle Output Path", Application.dataPath, "");
+                if (!string.IsNullOrEmpty(path))
+                {
+                    model.assetBundlePath = path;
+                }
+            }
+
+            EditorGUILayout.EndHorizontal();
+
+            EditorGUI.BeginChangeCheck();
+            var name = EditorGUILayout.TextField("Name", model.manifestAssetBundleName);
+            if (EditorGUI.EndChangeCheck())
+            {
+                model.manifestAssetBundleName = name;
+            }
+
             if (GUILayout.Button("Gen Manifest"))
             {
                 ctrl.Run();
@@ -25,10 +52,10 @@ namespace XH
             if (GUILayout.Button("Save As"))
             {
                 var root = Directory.GetParent(Application.dataPath).ToString();
-                var name = "assetbundle_manifest.txt";
+                var file = "assetbundle_manifest.txt";
 
-                var path = Path.Combine(root, name).Replace("\\", "/");
-                ctrl.Save(path);
+                var full = Path.Combine(root, file).Replace("\\", "/");
+                ctrl.Save(full);
             }
         }
     }

@@ -20,6 +20,8 @@ namespace XH
             var m = new AssetBundleManifestGenModel();
             var c = new AssetBundleManifestGenCtrl(m);
             view = new AssetBundleManifestGenView(m, c);
+
+            this.titleContent = new GUIContent("Gen AssetBundle Manifest");
         }
 
         void OnGUI()

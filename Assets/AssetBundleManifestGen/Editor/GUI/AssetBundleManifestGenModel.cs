@@ -10,6 +10,8 @@ namespace XH
 
     class AssetBundleManifestGenModel
     {
+        public string assetBundlePath = string.Empty;
+        public string manifestAssetBundleName = string.Empty;
         public List<AB> manifest = new List<AB>();
     }
 }

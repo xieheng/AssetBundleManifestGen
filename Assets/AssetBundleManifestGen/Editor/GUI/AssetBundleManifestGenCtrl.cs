@@ -16,7 +16,7 @@ namespace XH
         {
             model.manifest.Clear();
 
-            Dictionary<string, string> manifest = AssetBundleManifestGen.Gen();
+            Dictionary<string, string> manifest = AssetBundleManifestGen.Gen(model.assetBundlePath, model.manifestAssetBundleName);
             foreach (var m in manifest)
             {
                 AB ab = new AB();
