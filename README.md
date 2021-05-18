@@ -1,1 +1,7 @@
-# AssetBundleManifestGen
+提供一种相对稳定的计算assetbundle文件hash值的方案。
+
+根据unity3d官方提供的信息，如果因为某个原因导致u3d项目reimport了部分（甚至全部）资源，那么涉及到这些资源的assetbundle文件可能会发生变化，从而导致根据整个文件内容计算得到的hash就会发生变化，进而引发规模很大的热更。
+
+解决这个问题的一个方案是，开启u3d的cache server，避免reimport资源或者减少reimport的规模。但这需要额外的服务器，且需要定期维护（比如备份资源）。
+
+这个小工具提供另外一种解决思路。不根据assetbundle本身来计算hash，而是解析出组成assetbundle的资源文件，再根据这些资源文件来计算assetbundle的hash值。无论是否reimport资源，只要资源本身没有变化，assetbundle的hash就不会发生变化；当然，资源本身变化了，hash也自然会发生变化。
