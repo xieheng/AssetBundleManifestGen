@@ -4,4 +4,6 @@
 
 解决这个问题的一个方案是，开启u3d的cache server，避免reimport资源或者减少reimport的规模。但这需要额外的服务器，且需要定期维护（比如备份资源）。
 
-这个小工具提供另外一种解决思路。不根据assetbundle本身来计算hash，而是解析出组成assetbundle的资源文件，再根据这些资源文件来计算assetbundle的hash值。无论是否reimport资源，只要资源本身没有变化，assetbundle的hash就不会发生变化；当然，资源本身变化了，hash也自然会发生变化。
+这个小工具提供另外一种解决思路：不根据assetbundle本身来计算hash，而是解析出组成assetbundle的资源文件，再根据这些资源文件来计算assetbundle的hash值。无论是否reimport资源，只要资源本身没有变化，assetbundle的hash就不会发生变化；当然，资源本身变化了，hash也自然会发生变化。
+
+需要注意的是，如果使用这个工具计算的hash用于资源热更的话，需要记录两个hash。一个是assetbundle本身的hash，用于下载完成后的校验；另一个是工具计算的hash，用于判断assetbundle是否发生变化。
